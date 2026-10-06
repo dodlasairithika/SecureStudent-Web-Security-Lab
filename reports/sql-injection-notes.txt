@@ -1,0 +1,58 @@
+Vulnerability: SQL Injection
+
+Location: Login page
+
+Severity: High
+
+Description:
+The login page directly places user-supplied input into an SQL query.
+An attacker can manipulate the query and bypass authentication.
+
+Test Input:
+' OR '1'='1' -- 
+
+Result:
+Authentication bypass was successful.
+
+Impact:
+An attacker may gain unauthorized access to a user account without
+knowing the correct password.
+
+Root Cause:
+User input is directly concatenated into the SQL query.
+
+Retest:
+The same SQL Injection payload was tested after remediation.
+
+Result:
+Authentication bypass was no longer successful.
+
+Normal login was also tested and continued to work correctly.
+
+Final Status:
+Fixed and verified
+
+Additional Verification – Profile Page
+
+The profile page was also reviewed because it accepted the username through a URL parameter.
+
+Original issue:
+The username was directly included in the SQL query.
+
+Remediation:
+A prepared statement with a parameterized query was implemented.
+
+Normal profile lookup was tested successfully using:
+student1
+
+SQL injection testing was performed using a SQL injection payload.
+
+Result:
+The application returned "User not found." instead of returning a user record.
+
+Evidence:
+11-profile-normal-after-fix.png
+12-profile-sql-injection-blocked.png
+
+Final Status:
+SQL Injection fixed and verified in login.php and profile.php.

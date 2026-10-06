@@ -1,0 +1,38 @@
+Vulnerability: Stored Cross-Site Scripting (XSS)
+
+Location:
+Student Profile page
+
+Severity:
+Medium
+
+Issue:
+User-controlled username data was stored in the database and displayed
+on the profile page without output encoding.
+
+Test Payload:
+<script>alert(1)</script>
+
+Result:
+The browser executed the JavaScript and displayed an alert popup containing "1".
+
+Impact:
+An attacker could potentially execute JavaScript in another user's browser
+if malicious content is stored and later displayed.
+
+Root Cause:
+User-controlled data was output directly into HTML without proper encoding.
+
+Recommended Fix:
+Use htmlspecialchars() when displaying user-controlled data.
+
+Remediation:
+Applied htmlspecialchars() with ENT_QUOTES and UTF-8 encoding
+when displaying user-controlled username and email values.
+
+Verification:
+The same XSS payload was tested again after the fix.
+The payload was displayed as text and JavaScript was not executed.
+
+Final Status:
+Fixed and verified.

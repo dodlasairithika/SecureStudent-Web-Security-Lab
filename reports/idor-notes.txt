@@ -1,0 +1,58 @@
+Vulnerability: Insecure Direct Object Reference (IDOR) / Broken Access Control
+
+Location:
+Student Details page
+
+Severity:
+High
+
+Issue:
+The student details page accepts a student ID directly from the URL
+without checking whether the logged-in user is authorized to access
+that student's record.
+
+Test:
+URL 1:
+student.php?id=1
+
+Result:
+Riya's student details were displayed.
+
+URL 2:
+student.php?id=2
+
+Result:
+Arjun's student details were displayed.
+
+Security Risk:
+A user could change the ID value in the URL and potentially access
+another student's information without proper authorization.
+
+Root Cause:
+The application retrieves a student record using the supplied ID
+without performing an authorization check.
+
+Recommended Fix:
+Implement server-side authorization checks before displaying a
+student record. The application should verify that the requested
+record belongs to the logged-in user or that the user has an
+authorized role such as admin.
+
+Remediation:
+Implemented server-side authorization using the logged-in user's session
+and the user_id ownership relationship in the students table.
+
+The student query was changed to verify both:
+1. The requested student ID.
+2. The logged-in user's ID.
+
+A prepared statement was also used for the database query.
+
+Verification:
+1. student1 successfully accessed their own record.
+2. student1 attempted to access student2's record by changing the ID.
+3. Access was denied.
+4. The unauthorized student's information was not displayed.
+
+Final Status:
+Fixed and verified.

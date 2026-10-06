@@ -1,0 +1,38 @@
+Vulnerability: Weak Session Management
+
+Location:
+Login and logout functionality
+
+Severity:
+Medium
+
+Issue:
+The application required stronger session lifecycle controls to protect
+authenticated sessions.
+
+Security Risks:
+Weak session management can allow session-related attacks and may leave
+authenticated access available longer than intended.
+
+Security Improvements Implemented:
+
+1. Session-based authentication was implemented.
+2. session_regenerate_id(true) is called after successful authentication
+   to reduce session fixation risk.
+3. A dedicated logout function was implemented.
+4. Session data is cleared during logout.
+5. The session cookie is removed during logout.
+6. The server-side session is destroyed.
+
+Verification:
+1. User successfully logged in.
+2. Protected student information was accessible after authentication.
+3. User logged out successfully.
+4. The protected student page was accessed after logout.
+5. Access was denied because the authenticated session no longer existed.
+
+Evidence:
+08-session-after-logout.png
+
+Final Status:
+Fixed and verified.

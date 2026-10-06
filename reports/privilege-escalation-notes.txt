@@ -1,0 +1,40 @@
+Privilege Escalation / Broken Access Control
+
+Vulnerability:
+Unauthorized Admin Account Creation
+
+Location:
+register.php
+
+Severity:
+High
+
+Description:
+The public registration page allowed an unauthenticated user to select the account role.
+
+The original registration form included an Admin role option. A test account named testadmin was successfully created with the Admin role without requiring administrator authorization.
+
+Impact:
+An attacker could potentially create an unauthorized administrative account and gain privileges intended only for trusted administrators.
+
+Evidence:
+13-admin-account-created.png
+
+Remediation:
+The server-side registration logic was changed so that public registration always assigns the "student" role.
+
+The role is now determined on the server instead of trusting the role value submitted by the user.
+
+Verification:
+A second test account named testadmin2 was registered while selecting the Admin option.
+
+The database was checked in phpMyAdmin.
+
+The stored role for testadmin2 was:
+student
+
+Evidence:
+14-admin-registration-blocked.png
+
+Final Status:
+Fixed and Verified

@@ -1,0 +1,44 @@
+Security Misconfiguration / Exposed Diagnostic Page
+
+Vulnerability:
+Exposed Debug / Diagnostic Page
+
+Location:
+test_connection.php
+
+Severity:
+Low
+
+Description:
+The application contained a diagnostic page named test_connection.php in the web-accessible project directory.
+
+The page displayed:
+"Database connection successful!"
+
+Although the page did not expose database credentials, keeping diagnostic or testing pages accessible through the browser is a security misconfiguration. Such pages may reveal information about the application's internal components and should not be present in a production environment.
+
+Risk:
+An attacker may discover diagnostic endpoints and use the information provided to understand the application's environment or identify additional testing/debugging functionality.
+
+Evidence:
+09-debug-page-exposed.png
+
+Remediation:
+Remove the diagnostic test_connection.php file from the web-accessible directory after database connectivity testing is completed.
+
+Verification:
+The file will be removed and the URL will be tested again to confirm that the diagnostic page is no longer accessible.
+
+
+Final Status:
+Fixed and Verified
+
+Verification:
+The test_connection.php file was deleted from the web-accessible project directory.
+
+When the previous URL was accessed again, Apache returned:
+"Not Found - The requested URL was not found on this server."
+
+Evidence:
+09-debug-page-exposed.png
+10-debug-page-removed.png

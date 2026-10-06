@@ -1,5 +1,7 @@
 # SecureStudent – Web Application Security Lab
 
+A hands-on PHP/MySQL web security lab focused on identifying, exploiting, and fixing common web application vulnerabilities in a controlled local environment.
+
 ## About the Project
 
 SecureStudent is a small web application security project that I built to practice finding and fixing common web application vulnerabilities.
